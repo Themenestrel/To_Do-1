@@ -27,7 +27,7 @@
 
 <div id="tasklist" class="task-items-wrapper">
     {% for grupo in criar_grupo %}
-    <div class="task-wrapper" data-position="{{grupo.pk}}">
+    <div class="task-wrapper" data-position="{{ grupo.pk }}">
         <div class="task-title">
             <div class="task-complete-icon"></div>
             <a href="{% url 'mostra_tarefa_grupo' grupo.id %}">{{ grupo }}</a>
