@@ -17,7 +17,7 @@ class Tags(models.Model):
 
 class Tarefa(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
-    grupo = models.ForeignKey(Grupos, on_delete=models.CASCADE, null=True, blank=True)
+    grupo = models.ForeignKey(Grupos, on_delete=models.CASCADE, null=True, blank=True, related_name='tarefa_grupos')
     title = models.CharField(max_length=100, null=True, blank=True)
     description = models.TextField(null=True, blank=True)
     complete = models.BooleanField(default=False)
