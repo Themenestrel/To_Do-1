@@ -14,11 +14,9 @@
 {% endif %}
 </div>
 
-<h1>Minhas Tarefas
-{% for author in author_list %}
-    <li>{{ join }}</li>
-{% endfor %}
-</h1>
+
+
+<h1>Minhas Tarefas</h1>
 
 <div id="search-add-wrapper">
 <form method="GET">
@@ -29,19 +27,20 @@
 </div>
 
 <div id="tasklist" class="task-items-wrapper">
-    {% for grupo in join %}
+    {% for tarefa in join %}
+
     <div class="task-wrapper" data-position="{{grupo.pk}}">
         <div class="task-title">
-            {% if grupo.complete %}
+            {% if tarefa.complete %}
             <div class="task-complete-icon"></div>
-            <a href="{% url 'mostra_tarefa_grupo' grupo.id %}">{{ grupo }}</a>
+            <a href="{% url 'atualizar' tarefa.id %}">{{ tarefa }}</a>
             {% else %}
             <div class="task-incomplete-icon"></div>
-            <a href="{% url 'mostra_tarefa_grupo' grupo.id %}">{{ grupo }}</a>
+            <a href="{% url 'atualizar' tarefa.id %}">{{ tarefa }}</a>
             {% endif %}
         </div>
         <div class="task-controls">
-            <a class="delete-link" href="{% url 'apagar' grupo.id %}">&#215;</a>
+            <a class="delete-link" href="{% url 'apagar' tarefa.id %}">&#215;</a>
             <span class="handle">&nbsp;&#10247;</span>
         </div>
     </div>
@@ -49,8 +48,8 @@
     {% empty %}
     <h3>No items in list</h3>
     {% endfor %}
+
 </div>
 
 
 {% endblock content %}
-
