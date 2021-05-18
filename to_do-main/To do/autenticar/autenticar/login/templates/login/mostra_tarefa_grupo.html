@@ -5,7 +5,6 @@
 <div class='header-bar'>
     <div>
         <h1>Hello, {{ request.user.first_name }}</h1>
-        <h3 style="margin:0">Você tem <i>{{ count }}</i> itens incompletos.</h3>
     </div>
 
 {% if request.user.is_authenticated %}
@@ -17,7 +16,7 @@
 
 <h1>Minhas Tarefas
 {% for author in author_list %}
-    <li>{{ mostra_tarefa_grupo }}</li>
+    <li>{{ join }}</li>
 {% endfor %}
 </h1>
 
@@ -30,19 +29,19 @@
 </div>
 
 <div id="tasklist" class="task-items-wrapper">
-    {% for tarefa in tarefas %}
-    <div class="task-wrapper" data-position="{{tarefa.pk}}">
+    {% for grupo in join %}
+    <div class="task-wrapper" data-position="{{grupo.pk}}">
         <div class="task-title">
-            {% if tarefa.complete %}
+            {% if grupo.complete %}
             <div class="task-complete-icon"></div>
-            <a href="{% url 'grupos' tarefa.id %}">{{tarefa}}</a>
+            <a href="{% url 'mostra_tarefa_grupo' grupo.id %}">{{ grupo }}</a>
             {% else %}
             <div class="task-incomplete-icon"></div>
-            <a href="{% url 'grupos' tarefa.id %}">{{tarefa}}</a>
+            <a href="{% url 'mostra_tarefa_grupo' grupo.id %}">{{ grupo }}</a>
             {% endif %}
         </div>
         <div class="task-controls">
-            <a class="delete-link" href="{% url 'apagar' tarefa.id %}">&#215;</a>
+            <a class="delete-link" href="{% url 'apagar' grupo.id %}">&#215;</a>
             <span class="handle">&nbsp;&#10247;</span>
         </div>
     </div>
@@ -52,4 +51,6 @@
     {% endfor %}
 </div>
 
+
 {% endblock content %}
+
