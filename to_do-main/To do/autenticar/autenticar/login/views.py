@@ -133,13 +133,11 @@ class VisualizaGrupo(LoginRequiredMixin, ListView):
         form.instance.user = self.request.user
         return super(VisualizaGrupo, self)
 
-class Mostra_tarefa_grupo(LoginRequiredMixin, ListView):
-    model = Grupos
-    fields = '__all__'
-    context_object_name = 'criar_grupo'
-    success_url = reverse_lazy('mostra_tarefa_grupo')
-    template_name = 'login/mostra_tarefa_grupo.html'
+class MostraTarefaGrupo(LoginRequiredMixin, View):
 
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        return super(mostra_tarefa_grupo, self)
+    def get(self, request, pk):
+        grupo_especifico = Grupos.objects.get(id=pk)
+        join = grupo_especifico.tarefa_grupos.all()
+        context = {'join': join}
+
+        return render(request, "login/mostra_tarefa_grupo.html", context)
